@@ -1,0 +1,27 @@
+Definir contexto [ Libros , Hora ] 
+
+Definir componentes [ Container :{TotalBooks} ,  ListPreview:{fetch libros seleccionado {Array de libros seleccionados compuesto por un objeto que contenga {nombre,datos del libreo y tome la fecha y hora }
+
+
+definir Filtro por categoria , y filtrado por rate 
+
+Posibilidad de crear nuevos libros 
+
+(investigar base de datos para subir imagenes ) 
+
+
+Posibilidad de incorporar JSonServer o Firebase al proyecto 
+
+
+Tecnologias a utilizar :
+
+Vite
+React
+Context API 
+Fetch API
+react hook forms
+tailwindcss
+
+
+Firebase
+Firebase auth
