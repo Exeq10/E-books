@@ -7,21 +7,16 @@ function Layout() {
 
   /* regula el menu desplegable */
   const [visible, setVisible] = useState(false);
+  const [visibleFav, setVisibleFav] = useState(false);
 
-  const handleVisible = () => {
-    if (visible) {
-      setVisible(false);
-    } else if (!visible) {
-      setVisible(true);
-    }
-  };
+ 
 
   const { Favorites, setLen, len } = useContext(BooksContext);
 
   useEffect(() => {
-    if (Favorites.length) {
-      setLen(Favorites.length);
-    }
+
+  Favorites.length ? setLen(Favorites.length) : setLen(0)
+    
   }, [Favorites]);
 
   return (
@@ -36,10 +31,10 @@ function Layout() {
         <nav className="flex w-full justify-end bg-blue-950 text-white items-center px-3">
           <ul className="flex gap-3 p-3 text-md">
             <li>Más Leídos</li>
-            <li className="relative cursor-pointer" onClick={handleVisible}>
+            <li className="relative cursor-pointer" onMouseEnter={()=> setVisible(true)}  >
               Géneros
               {visible ? (
-                <ul className="flex flex-col justify-center items-center z-10 pt-4 absolute top-4 text-black  w-32 mt-3 gap-2 text-center bg-white shadow-md rounded-sm  ">
+                <ul  onMouseLeave={()=> setVisible(false)} className="flex flex-col justify-center items-center z-10 py-4 absolute top-4 text-black  w-32 mt-3 gap-2 text-center bg-white shadow-md rounded-sm  ">
                   <li className="w-full hover:bg-blue-950 hover:text-white">
                     <Link to={"Terror"}>Terror</Link>
                   </li>
@@ -61,11 +56,30 @@ function Layout() {
               )}
             </li>
             <li>Más Nuevos</li>
-            <li>
+            <li  onMouseEnter={()=> setVisibleFav(true)   }  onMouseLeave={()=> setVisibleFav(false)}>
               <Link to={'/favoritos'}> Mi Lista</Link>{" "}
-              <span className="bg-white text-blue-950 rounded-full px-3">
+              <span className="bg-white text-blue-950 rounded-full px-3 ">
                 {len}
+
+                {
+                  console.log('cantidad de datos',len)
+                }
               </span>{" "}
+
+
+                <div className={`w-auto absolute shadow-md  ${visibleFav ? 'flex' : 'hidden'} gap-2 flex-col bg-white px-3 py-2 z-10`}>
+
+                 
+                 {Favorites.length > 0 ?   Favorites.map((fav,key)=>  <div key={key} className="flex justify-start items-center gap-1">
+                    <img src={fav.book.cover} alt="logo" className="w-8" />
+                    <h4 className="text-black">{fav.book.title}</h4>
+                  </div>) : (<p className="text-blue-950">No hay libros favoritos</p>) }
+
+
+{Favorites.length > 0 ?         
+        <Link to={'/favoritos'} className="text-blue-950 text-center hover:text-blue-700">Ver Todos</Link> : ''} 
+                </div>
+
             </li>
           </ul>
           <div className="flex gap-2">

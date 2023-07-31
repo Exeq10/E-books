@@ -1,12 +1,12 @@
 
 import { BooksContext } from "./context/BooksProvider";
 import { useContext } from "react";
-function Book({ book, rate }) {
-  const { title, ISBN, year, cover, genre, synopsis } = book.book;
+function Book({ book }) {
+  const { title, ISBN, year, cover, genre, synopsis,rate } = book.book;
 
 
 
-  const {selectFavorite,ReadBooks} = useContext(BooksContext)
+  const {selectFavorite,ReadBooks, viewRate} = useContext(BooksContext)
 
 
 
@@ -22,10 +22,12 @@ function Book({ book, rate }) {
           />
         </picture>
       </div>
-
+   
       <div>
         <p className="text-center font-medium mt-2 ">{title} </p>
       </div>
+
+      {viewRate(rate)}
 
       <div className="flex mb-3">
       <button

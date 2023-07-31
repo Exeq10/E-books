@@ -1,7 +1,9 @@
-function CardFavorite({ book }) {
+function CardFavorite({ book,deleteFav }) {
   const { title, ISBN, year, cover, genre, synopsis } = book.book;
   return (
     <div className="border flex flex-col  justify-center items-center bg-white p-2">
+
+
       <div>
         <picture className="">
           <img
@@ -26,9 +28,12 @@ function CardFavorite({ book }) {
         </div>
       </div>
 
-      <div>
+      <div className="flex gap-2 items-center">
         <button className="px-5 py-1 bg-BlueHeader text-white  rounded-md shadow-md mt-3">
           Leer
+        </button>
+        <button  onClick={()=> deleteFav(ISBN)} className="px-5 py-1 bg-red-800 text-white  rounded-md shadow-md mt-3">
+          Eliminar
         </button>
       </div>
     </div>

@@ -12,7 +12,7 @@ import'swiper/css/effect-cards'
 import CardBook from "./CardBook";
 
 function RatedBooks({init,end}) {
-  const [rate, setRate] = useState(0);
+  const [recomended, setRecomended] = useState(0);
 
   const { books } = useContext(BooksContext);
 
@@ -21,7 +21,7 @@ function RatedBooks({init,end}) {
     let ratest = books?.filter((book) => book.book.rate > 4);
 
     /* los primeros tres resultados  */
-    setRate(ratest.slice(init, end));
+    setRecomended(ratest.slice(init, end));
   }, [books]);
 
 
@@ -29,9 +29,9 @@ function RatedBooks({init,end}) {
   const renderingRate = () => {
 
 
-    if(rate.length > 0) {
-      return rate.map((book, key) => (
-        <SwiperSlide   key={key}><CardBook  book={book}  rate={rate} /></SwiperSlide>
+    if(recomended.length > 0) {
+      return recomended.map((book, key) => (
+        <SwiperSlide   key={key}><CardBook  book={book}   /></SwiperSlide>
        
         
         

@@ -24,9 +24,9 @@ function ListBooks({ myRef }) {
       </h2>
 
       <div className="flex w-full mb-28">
-        <RatedBooks init={0} end={2} />
-        <RatedBooks init={3} end={5} />
-        <RatedBooks init={5} end={7} />
+        <RatedBooks rate={rate} init={0} end={2} />
+        <RatedBooks rate={rate} init={3} end={5} />
+        <RatedBooks rate={rate} init={5} end={8} />
       </div>
 
       {/* Lista total de libros  */}

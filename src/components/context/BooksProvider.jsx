@@ -4,9 +4,7 @@ import { createContext, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Book from "../Book";
 
-import {toast} from 'react-toastify'
-
-
+import { toast } from "react-toastify";
 
 const BooksContext = createContext();
 
@@ -18,36 +16,43 @@ function BooksProvider({ children }) {
 
   const [error, setError] = useState([]);
 
+  /* Notificacion
+   */ const notify = (mensaje) =>
+    toast.success(mensaje, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: 0,
+      theme: "light",
+    });
 
-
-/* Notificacion
- */  const notify = () => toast.success('Agregado a la lista ',  {
-position: "top-right",
-autoClose: 3000,
-hideProgressBar: false,
-closeOnClick: true,
-pauseOnHover: true,
-draggable: true,
-progress: 0,
-theme: "light",
-});
-
-
-/* Notificacion
- */  const notifyError = () => toast.error('El libro está en la lista',  {
-position: "top-right",
-autoClose: 3000,
-hideProgressBar: false,
-closeOnClick: true,
-pauseOnHover: true,
-draggable: true,
-progress: 0,
-theme: "light",
-});
-
-
-
-
+  /* Notificacion
+   */ const notifyError = (mensaje) =>
+    toast.error(mensaje, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: 0,
+      theme: "light",
+    });
+  /* Notificacion
+   */ const notifyInfo = (mensaje) =>
+    toast.info(mensaje, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: 0,
+      theme: "light",
+    });
 
   /* funcion que trae todos los libros  */
   const getBooks = async () => {
@@ -67,24 +72,43 @@ theme: "light",
     getBooks();
   }, []);
 
+  /* Favoritos ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
   /* selecciona el favorito */
 
   const selectFavorite = (ISBN) => {
     const BookFavorite = books.find((book) => book.book.ISBN == ISBN);
 
     if (Favorites.find((b) => b.book.ISBN == BookFavorite.book.ISBN)) {
-      
-
-      notifyError()
+      notifyError("El libro ya existe en la lista");
     } else {
-      setFavorites([BookFavorite, ...Favorites]);
+      if (Favorites.length >= 4) {
+        notifyInfo("Debe eliminar un libro antes de agregar más");
+      } else {
+        setFavorites([BookFavorite, ...Favorites]);
 
-      notify()
+        notify("Agregado correctamente");
 
-      /* seteo el array de libros original con los resultados restandoles los que se agregan a favoritos */
-      setBooks(books.filter((b) => b.book.ISBN != BookFavorite.book.ISBN));
+        /* seteo el array de libros original con los resultados restandoles los que se agregan a favoritos */
+        setBooks(books.filter((b) => b.book.ISBN != BookFavorite.book.ISBN));
+      }
     }
   };
+
+  /* Eliminar Favorito  */
+
+  const deleteFav = (ISBN) => {
+    const BookFavoriteDelete = Favorites.find((book) => book.book.ISBN == ISBN);
+
+    setBooks([BookFavoriteDelete, ...books]);
+
+    setFavorites(
+      Favorites.filter((b) => b.book.ISBN != BookFavoriteDelete.book.ISBN)
+    );
+
+    notify("Eliminado Correctamente");
+  };
+
+  /* Fin sección favoritos //////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
   /* estado de carga  */
 
@@ -106,15 +130,28 @@ theme: "light",
       categoria.length,
     ];
   };
-  /* Funcion que filtra donde se le pasan parametros de array a filtrar y categoria  */
+
+  /* sección categorías ////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+
+  /* Función que filtra donde se le pasan parámetros de array a filtrar y categoría  */
   const filtroCard = (cat, arr) => {
     const categoria = arr.filter((book) => book.book.genre == `${cat}`);
 
     return [categoria.map((book, key) => <Book book={book} key={key} />)];
   };
 
-  /* Estado que se modifica segun cantidad de libro que hay en los filtros  */
+  /* Estado que se modifica según cantidad de libro que hay en los filtros  */
   const [len, setLen] = useState(0);
+
+  /* fin categorías /////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+
+  /* sección rate ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+  const viewRate = (rate) => {
+    const Rating = Array(Math.floor(rate));
+
+   
+  };
 
   const ReadBooks = () => {
     console.log("Leyendo");
@@ -127,6 +164,7 @@ theme: "light",
         error,
         selectFavorite,
         Favorites,
+        deleteFav,
         loading,
         setLoading,
         setLen,
@@ -134,6 +172,7 @@ theme: "light",
         ReadBooks,
         filtro,
         filtroCard,
+        viewRate,
       }}
     >
       {children}
