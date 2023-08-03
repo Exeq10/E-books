@@ -1,5 +1,7 @@
+import Rating from "./Base/Rating";
+
 function CardFavorite({ book,deleteFav }) {
-  const { title, ISBN, year, cover, genre, synopsis } = book.book;
+  const { title, ISBN, year, cover, genre, synopsis,rate,author:{name} } = book.book;
   return (
     <div className="border flex flex-col  justify-center items-center bg-white p-2">
 
@@ -17,12 +19,20 @@ function CardFavorite({ book,deleteFav }) {
       <div className="flex justify-center items-center  flex-col gap-6">
         <h2 className="text-center text-lg font-semibold mt-2">{title} </h2>
 
-        <div className="flex justify-start items-center gap-2">
+        <Rating rate={rate}/>
+
+        <div className="flex  gap-2">
           <label className="text-black">Año de publicación :</label>
           <p className="text-gray-400">{year} </p>
         </div>
 
-        <div className="flex justify-start items-center gap-2  ">
+        <div className="flex gap-2">
+          <p className="text-black">Autor :</p>
+          
+        <p className="text-gray-400">{name}</p>
+        </div>
+
+        <div className="flex  gap-2  ">
           <label className="text-black">Género :</label>
           <p className="text-gray-400">{genre} </p>
         </div>

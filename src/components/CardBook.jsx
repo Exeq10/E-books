@@ -1,6 +1,7 @@
 
 import { BooksContext } from "./context/BooksProvider";
 import { useContext } from "react";
+import Rating from "./Base/Rating";
 
 
 function CardBook({ book}) {
@@ -30,7 +31,8 @@ function CardBook({ book}) {
       </div>
 
       <div>
-        <p className="text-center">{title} </p>
+        <p className="text-center mb-2">{title} </p>
+        <Rating rate={Math.floor(rate)}/>
       </div>
 
     {/* seleccionar favorito */}

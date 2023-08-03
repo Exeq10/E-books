@@ -24,7 +24,7 @@ function Layout() {
       <section className="w-full flex  px-4 bg-blue-950  ">
         <Link to={'/'}>
           <picture>
-            <img src="E-books.svg" alt="" className="w-36 h-20" />
+            <img src="2.svg" alt="" className="w-44 h-20" />
           </picture>
         </Link>
 
@@ -61,9 +61,8 @@ function Layout() {
               <span className="bg-white text-blue-950 rounded-full px-3 ">
                 {len}
 
-                {
-                  console.log('cantidad de datos',len)
-                }
+                
+                
               </span>{" "}
 
 

@@ -1,4 +1,5 @@
 
+import Rating from "./Base/Rating";
 import { BooksContext } from "./context/BooksProvider";
 import { useContext } from "react";
 function Book({ book }) {
@@ -27,18 +28,19 @@ function Book({ book }) {
         <p className="text-center font-medium mt-2 ">{title} </p>
       </div>
 
-      {viewRate(rate)}
+        <Rating rate={Math.floor(rate)}/>
 
       <div className="flex mb-3">
       <button
         className="mt-4 w-5/12 mx-auto  rounded-md bg-white border border-blue-950 text-blue-950 hover:bg-blue-950 hover:text-white duration-150 ease-in px-3 py-1"
         onClick={()=>ReadBooks()}
       >
-        Leer{" "}
+        Ver{" "}
       </button>
 
         {/* seleccionar favorito */}
       <button
+      title="Favoritos"
         className="mt-4 w-5/12 mx-auto  rounded-md bg-white  text-red-700 border border-red-700 hover:bg-red-700 hover:text-white duration-300 ease-in px-3 py-1"
         onClick={() => selectFavorite(ISBN)}
       >
