@@ -3,8 +3,12 @@ import { BooksContext } from "./context/BooksProvider";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
+
+import {Autoplay} from 'swiper/modules'
+
 // Import Swiper styles
 import "swiper/css";
+import 'swiper/css/controller'
 
 import Book from "./Book";
 import RatedBooks from "./RatedBooks";
@@ -43,7 +47,10 @@ function ListBooks({ myRef }) {
           </p>
         </div>
         <div className="w-full flex ">
-          <Swiper className="w-full px-2" spaceBetween={10} slidesPerView={5}>
+          <Swiper className="w-full px-2" spaceBetween={10} slidesPerView={5}   autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }} modules={[Autoplay]} >
             {filtro("Fantasía", books)}
           </Swiper>
         </div>
@@ -58,14 +65,20 @@ function ListBooks({ myRef }) {
           </p>
         </div>
         <div className="w-full flex gap-3">
-          <Swiper className="w-full px-2" spaceBetween={10} slidesPerView={5}>
+          <Swiper className="w-full px-2" spaceBetween={10} slidesPerView={5}   autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }} modules={[Autoplay]}>
             {filtro("Ciencia ficción", books)}
           </Swiper>
         </div>
 
        
         <div className="w-full flex gap-3">
-          <Swiper className="w-full px-2" spaceBetween={10} slidesPerView={5}>
+          <Swiper className="w-full px-2" spaceBetween={10} slidesPerView={5}   autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }} modules={[Autoplay]}>
             {filtro("Zombies", books)}
           </Swiper>
         </div>
@@ -80,7 +93,10 @@ function ListBooks({ myRef }) {
           </p>
         </div>
         <div className="w-full flex gap-3">
-          <Swiper className="w-full px-2" spaceBetween={10} slidesPerView={5}>
+          <Swiper className="w-full px-2" spaceBetween={10} slidesPerView={5}   autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }} modules={[Autoplay]}>
             {filtro("Terror", books)}
           </Swiper>
         </div>

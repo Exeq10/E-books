@@ -3,7 +3,7 @@ import { BooksContext } from "./context/BooksProvider";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-import {EffectCards} from 'swiper/modules'
+import {EffectCards,Autoplay} from 'swiper/modules'
 
 // Import Swiper styles
 import 'swiper/css';
@@ -52,10 +52,14 @@ function RatedBooks({init,end}) {
       
 
 <Swiper  
-modules={[EffectCards]}
+modules={[EffectCards,Autoplay]}
 effect="cards"
       spaceBetween={50}
       slidesPerView={1}
+      autoplay={{
+        delay: 3500,
+        disableOnInteraction: false,
+      }}
       
     >
       

@@ -86,6 +86,8 @@ function BooksProvider({ children }) {
       } else {
         setFavorites([BookFavorite, ...Favorites]);
 
+     
+
         notify("Agregado correctamente");
 
         /* seteo el array de libros original con los resultados restandoles los que se agregan a favoritos */
@@ -99,11 +101,15 @@ function BooksProvider({ children }) {
   const deleteFav = (ISBN) => {
     const BookFavoriteDelete = Favorites.find((book) => book.book.ISBN == ISBN);
 
+    /* devuelve el libro eliminado a la lista general */
     setBooks([BookFavoriteDelete, ...books]);
+    
 
     setFavorites(
       Favorites.filter((b) => b.book.ISBN != BookFavoriteDelete.book.ISBN)
     );
+
+
 
     notify("Eliminado Correctamente");
   };
@@ -173,6 +179,7 @@ function BooksProvider({ children }) {
         filtro,
         filtroCard,
         viewRate,
+        notifyError,notifyInfo
       }}
     >
       {children}

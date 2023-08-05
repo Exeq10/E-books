@@ -7,7 +7,10 @@ import CardFavorite from "./CardFavorite"
 
 function ListFavorites() {
 
-const {Favorites,deleteFav} = useContext(BooksContext)
+const {deleteFav,Favorites} = useContext(BooksContext)
+
+
+
 
   return (
 
