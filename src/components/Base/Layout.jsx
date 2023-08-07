@@ -38,7 +38,7 @@ function Layout() {
         <nav className="flex w-full justify-end bg-blue-950 text-white items-center px-3">
           <ul className="flex gap-3 p-3 text-md">
 
-            <li> <Link to={"/"}> Inicio</Link>{" "}</li>
+            <li > <Link to={"/"}> Inicio</Link>{" "}</li>
         
             <li
               className="relative cursor-pointer"
@@ -103,6 +103,9 @@ function Layout() {
                 )}
               </div>
             </li>
+
+
+            <li title="Agregar libro"><Link to={'/agregar'}  ><i className="fa-solid fa-plus"></i></Link>  </li>
           </ul>
         <Search books={books}/>
         </nav>

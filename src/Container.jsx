@@ -14,7 +14,7 @@ function Container() {
   return (
     <>
       <section className="  w-full h-screen flex bg-gray-100 justify-center gap-28 items-center ">
-        <div className="text-center flex  flex-col p-5 items-center   h-4/6 w-4/12">
+        <div className="text-center flex  flex-col p-5 items-center   h-4/6  md:w-4/12">
           <picture>
             <img src="/1.svg" alt="logo" className="w-72 " />
           </picture>
