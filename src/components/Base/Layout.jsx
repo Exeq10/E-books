@@ -105,7 +105,6 @@ function Layout() {
             </li>
 
 
-            <li title="Agregar libro"><Link to={'/agregar'}  ><i className="fa-solid fa-plus"></i></Link>  </li>
           </ul>
         <Search books={books}/>
         </nav>
@@ -117,7 +116,7 @@ function Layout() {
       <Outlet />
 
 
-      <footer className="w-full py-3 px-3 bg-blue-950 mt-3 text-center">
+      <footer className="w-full py-3 px-3 bg-blue-950 text-center  ">
 
                     <p className="text-white">
                     Sitio creado por Exequiel Schiavo  ©{year}

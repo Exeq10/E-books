@@ -10,7 +10,7 @@ import { ToastContainer } from "react-toastify";
 
 /* css de toastify */
 import 'react-toastify/dist/ReactToastify.css'
-import AddBook from "./components/Base/AddBook";
+
 
 
 
@@ -44,10 +44,7 @@ function App() {
     
         },
     
-        {path:'/agregar',
-        element:<AddBook/>
-    
-        }
+        
       ]
     },
 

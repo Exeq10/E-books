@@ -7,7 +7,7 @@ function Genders() {
     <>
 
 {
-  generos.map((gen,key) => <li key={key} className="w-full hover:bg-blue-950 hover:text-white">
+  generos.map((gen,key) => <li key={key} className="w-full hover:bg-blue-950 hover:text-white capitalize">
   <Link to={`${gen}`}>{gen}</Link>
 </li>)
 }

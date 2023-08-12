@@ -1,1 +1,1 @@
-export const generos = ['Terror','Fantasía','Ciencia ficción']
+export const generos = ['terror','fantasía','ciencia ficción']

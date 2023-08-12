@@ -35,9 +35,9 @@ function ListBooks({ myRef }) {
       <div className=" w-full flex flex-wrap gap-5 justify-start  ">
         {generos.map((gen, key) => {
           return (
-            <>
-              <div className="flex flex-col gap-2 justify-center items-center p-3">
-                <h3 className="text-3xl font-bold mt-2 mb-2 px-5 py-1 rounded-md border-b-2 border-blue-950 bg-blue-950 text-white shadow-lg ">
+            <div key={key} className="w-full flex items-start flex-col"> 
+              <div  className="flex flex-col gap-2 justify-center items-center p-3">
+                <h3 className="text-3xl capitalize font-bold mt-2 mb-2 px-5 py-1 rounded-md border-b-2 border-blue-950 bg-blue-950 text-white shadow-lg ">
                   {gen}
                 </h3>
 
@@ -60,7 +60,7 @@ function ListBooks({ myRef }) {
                 </Swiper>
               </div>
               {/* resolucion mobile */}
-              <div className="w-full flex ">
+              <div className="w-full flex md:hidden ">
                 <Swiper
                   className="w-full px-2"
                   spaceBetween={10}
@@ -74,7 +74,7 @@ function ListBooks({ myRef }) {
                   {filtro(gen, books)}
                 </Swiper>
               </div>
-            </>
+            </div>
           );
         })}
       </div>

@@ -5,10 +5,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Book from "../Book";
 
 import { toast } from "react-toastify";
+import { redirect } from "react-router-dom";
+
 
 const BooksContext = createContext();
 
 function BooksProvider({ children }) {
+
   /* lista total de libros  */
   const [books, setBooks] = useState([]);
 
@@ -54,9 +57,13 @@ function BooksProvider({ children }) {
       theme: "light",
     });
 
+  /* Comienzan Acciones  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
   /* funcion que trae todos los libros  */
   const getBooks = async () => {
+
+   
     try {
+      console.log('cargando libros');
       let res = await fetch("http://localhost:3000/library");
 
       let data = await res.json();
@@ -72,7 +79,36 @@ function BooksProvider({ children }) {
     getBooks();
   }, []);
 
-  /* Favoritos ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+  /* funcion que agrega el libro a la API  */
+  const addBook = async (datos) => {
+
+
+    try {
+      const res = await fetch("http://localhost:3000/library", {
+        /* método http para enviar datos al servidor */
+        method: "POST",
+        /* datos a enviar al servidor tomamos un objeto y lo convertimos en json */
+        body: JSON.stringify(datos),
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      await res.json();
+    } catch (error) {
+      console.log(error);
+    }
+
+   /*  notify("Libro agregado correctamente"); */
+
+  return redirect("/")
+
+
+
+   
+  };
+
   /* selecciona el favorito */
 
   const selectFavorite = (ISBN) => {
@@ -85,8 +121,6 @@ function BooksProvider({ children }) {
         notifyInfo("Debe eliminar un libro antes de agregar más");
       } else {
         setFavorites([BookFavorite, ...Favorites]);
-
-     
 
         notify("Agregado correctamente");
 
@@ -103,24 +137,23 @@ function BooksProvider({ children }) {
 
     /* devuelve el libro eliminado a la lista general */
     setBooks([BookFavoriteDelete, ...books]);
-    
 
     setFavorites(
       Favorites.filter((b) => b.book.ISBN != BookFavoriteDelete.book.ISBN)
     );
 
-
-
     notify("Eliminado Correctamente");
   };
 
-  /* Fin sección favoritos //////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+  /* Fin Acciones   //////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
   /* estado de carga  */
 
   const [loading, setLoading] = useState(false);
 
   /* Funcion que filtra donde se le pasan parametros de array a filtrar y categoria  */
+
+  /* ////////////////////////////////////////////Filtros////////////////////////////////////////////////////////////////////////////// */
   const filtro = (cat, arr) => {
     const categoria = arr.filter(
       (book) => book.book.genre == `${cat}` && book.book.rate <= 3.5
@@ -137,8 +170,6 @@ function BooksProvider({ children }) {
     ];
   };
 
-  /* sección categorías ////////////////////////////////////////////////////////////////////////////////////////////////////////// */
-
   /* Función que filtra donde se le pasan parámetros de array a filtrar y categoría  */
   const filtroCard = (cat, arr) => {
     const categoria = arr.filter((book) => book.book.genre == `${cat}`);
@@ -149,14 +180,12 @@ function BooksProvider({ children }) {
   /* Estado que se modifica según cantidad de libro que hay en los filtros  */
   const [len, setLen] = useState(0);
 
-  /* fin categorías /////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+  /* ///////////////////////////////////////////////Fin Filtros/////////////////////////////////////////////////////////// */
 
   /* sección rate ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
   const viewRate = (rate) => {
     const Rating = Array(Math.floor(rate));
-
-   
   };
 
   const ReadBooks = () => {
@@ -168,6 +197,8 @@ function BooksProvider({ children }) {
       value={{
         books,
         error,
+        addBook,
+        setError,
         selectFavorite,
         Favorites,
         deleteFav,
@@ -179,7 +210,9 @@ function BooksProvider({ children }) {
         filtro,
         filtroCard,
         viewRate,
-        notifyError,notifyInfo
+        notifyError,
+        notifyInfo,
+        notify,
       }}
     >
       {children}
